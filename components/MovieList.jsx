@@ -1,4 +1,4 @@
-// import App from './app.jsx';
+
 
 var MovieList = (props)	=> (
 

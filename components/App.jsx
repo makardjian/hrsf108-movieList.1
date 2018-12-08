@@ -2,6 +2,8 @@
 // will be functional classless components.
 import exampleData from '../exampleData.js'
 import MovieList from './MovieList.js'
+import Search from './Search.js'
+import AddMovies from './AddMovies.js'
 
 class App extends React.Component {
 
@@ -10,49 +12,47 @@ class App extends React.Component {
 
 		this.state = {
 			movieList: exampleData,
+			currentList: exampleData,
 			isHidden: false
+		}
+
+
+	}
+
+	updateMovieList (data) {
+
+		var matches = this.state.movieList.filter(movie => {
+			return movie.title === data; 
+		});
+
+		if (!matches.length) {
+		alert('Looks like there\'s no movie by that title on record.\n Please try another search.')
+
+		} else {
+
+		this.setState({
+			currentList: matches
+		});
+
 		}
 	}
 
-	updateData(data) {
-		this.setState({
-			movieList: data
-		})
-	}
 
-	filterMovieList () {
-		//if the value of the li elements are not equal to what the user submits, then 
-			//they should be toggled off. 
-		var $input = document.getElementsByClassName('input');
-		var $listElements = document.getElementsByClassName('movie-title')
+	addMovie(input) {
 
-
-
-		//this is how you would filter the HTML Collection on the DOM
-		$listElements = Array.prototype.filter.call($listElements, movie => {
-			return movie.textContent === $input[0].value
-		})
-
-
-		var filteredData = exampleData.filter(movie =>
-			movie.title === $input[0].value
-		)
-
-
-		this.updateData(filteredData);
-
+		this.setState({movieList: event.target.value});
 
 	}
+
+
 
 	render() {
 		return (
 			<div className='container'>
 				<h1>Movie List</h1>	
-					<input className="input" type="text" placeholder="Search..." />
-					<button className="go-button" onClick={
-						(event) => this.filterMovieList()
-					}>GO</button>
-				<MovieList movies={this.state.movieList} />
+				<AddMovies/>
+				<Search updateMovieList={this.updateMovieList.bind(this)}/>
+				<MovieList movies={this.state.currentList} />
 			</div>
 		);
 	}
