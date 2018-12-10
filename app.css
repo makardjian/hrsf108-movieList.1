@@ -1,0 +1,40 @@
+body {
+  background: #CAEBF2
+}
+
+.container {
+	background-color: whitesmoke;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	border: 3px black;
+	border-style: solid;
+	padding:3px;
+	text-align: center;
+}
+
+#movie-list {
+	list-style-type: none;
+}
+
+.movie-title {
+	border: 1px solid grey;
+	margin: auto;
+	padding: 5px;
+	color: black;
+}
+
+.watched {
+	background-color: #99ff99;
+}
+
+.movie-status-buttons {
+	padding: 3px;
+	margin: auto;
+	border: 2px;
+}
+
+.test-button {
+/*	display: inline-flex;*/
+	align-content: right;
+}

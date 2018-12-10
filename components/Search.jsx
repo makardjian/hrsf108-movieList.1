@@ -15,19 +15,25 @@ class Search extends React.Component {
 		})
 	}
 
+	clearInput() {
+		this.setState({
+			input: ''
+		})
+	}
+
 	render() {
 		return (
 		<div>
-			<input value={this.state.input} onChange={(event) => this.handleChange(event)} type="text" placeholder="Search Me..."/>
-			<button className="go-button" onClick={ (event) => {
+			<input value={this.state.input} onChange={(event) => this.handleChange(event)} 
+				type="text" placeholder="Search Me..."/>
 
-				var currentData = {title: this.state.input}
-
-				this.props.updateMovieList(this.state.input)
-
+			<button className="search-button" onClick={(event) => {
+				var currentData = {title: this.state.input};
+				this.props.updateMovieList(this.state.input);
+				this.clearInput()
 				}
 			}
-				>GO</button>
+				>Search</button>
 		</div>
 		)
 	}

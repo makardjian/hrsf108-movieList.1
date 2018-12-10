@@ -5,21 +5,40 @@ class AddMovies extends React.Component {
 		super(props);
 
 		this.state = {
-			addMovieInput: ''
+			movieInput: ''
 		}
 	}
 
-	handleChange () {
+	handleChange (userInput) {
+		this.setState({
+			movieInput: userInput
+		})
+	}
 
+	clearInput() {
+		this.setState({
+			movieInput: ''
+		})
 	}
 
 	render() {
 
 	return (
 
-		<div>
-			<input value='' id="add-movies" type="text" placeholder="Add a Movie Title!"/>
-			<button className="add-movie-button" onClick={(event) => {} }>GO</button>
+		<div className="add-movies">
+			<input value={this.state.movieInput} onChange={(event) => this.handleChange(event.target.value)} 
+				id="add-movies" type="text" placeholder="Add a Movie Title!"/>
+
+			<button className="add-movie-button" 
+				onClick={(event) => {
+					this.props.addMovie(this.state.movieInput);
+					this.clearInput()
+				}
+
+
+			}
+
+			>Add Movie</button>
 		</div>
 
 		)
@@ -29,14 +48,4 @@ class AddMovies extends React.Component {
 
 export default AddMovies;
 
-
-
-//the input field will have an onChange attribute that records anychanges to the field.
-	//when something changes, we invoke handleChange
-		//handleChange sets the state of addMovieInput to the event.target.value
-
-
-
-//the button click function will contain an event listener which will invoke a clearExampleData function
-//in the App. 
-	//this funciton should clear the movies that are currently on this.state.currentList
+//logic for making a 
