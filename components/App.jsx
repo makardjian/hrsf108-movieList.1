@@ -6,6 +6,7 @@ import AddMovies from './AddMovies.js'
 import MovieStatus from './MovieStatus.js'
 import WatchedToggle from './WatchedToggle.js'
 
+
 class App extends React.Component {
 
 	constructor(props) {
@@ -19,7 +20,9 @@ class App extends React.Component {
 			watchedMovies: null,
 			notWatched: null
 		}
+
 	}
+
 
 	updateMovieList (data) {
 		if (!this.state.userList.length) {
@@ -35,7 +38,6 @@ class App extends React.Component {
 						currentList: matches
 					})
 			}
-
 		}
 
 		if (this.state.userList.length) {
@@ -147,13 +149,52 @@ class App extends React.Component {
 		}
 	}
 
+	handleMovieDBSearch(text) {
+		var query = this.props.searchMovieDB(text, (data) => {
+
+			var titles = data.map(movie => {
+				return movie.title
+			})
+
+			if (!titles.length) {
+			alert('Looks like there\'s no movie by that title on record.\n' +
+			 'Please try another search.')
+				return
+		  }
+
+			var years = data.map(movie => {
+				return movie.release_date.slice(0,4)
+			})
+
+			var movieArr = [];
+
+			for (var i =0; i < titles.length; i++) {
+				movieArr.push({
+					title: titles[i],
+					year: years[i],
+				  runtime: null,
+				  imdbRating: null,
+				  watched: false,
+				  highlighted: false})
+			}
+
+			this.setState({
+				currentList: movieArr
+			})
+
+			})
+  }
+	
+
+
+
 
 	render() {
 		return (
 			<div className='container'>
 				<h1>Movie List</h1>	
 				<AddMovies addMovie={this.addMovie.bind(this)}/>
-				<Search updateMovieList={this.updateMovieList.bind(this)}/>
+				<Search handleMovieDBSearch={this.handleMovieDBSearch.bind(this)} updateMovieList={this.updateMovieList.bind(this)}/>
 				<MovieStatus filterMovies={this.filterMovies.bind(this)} />
 				<MovieList movies={this.state.currentList} 
 				highlightMovie={this.highlightMovie.bind(this)}

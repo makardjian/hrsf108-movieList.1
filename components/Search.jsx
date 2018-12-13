@@ -28,8 +28,9 @@ class Search extends React.Component {
 				type="text" placeholder="Search Me..."/>
 
 			<button className="search-button" onClick={(event) => {
-				var currentData = {title: this.state.input};
-				this.props.updateMovieList(this.state.input);
+				// var currentData = {title: this.state.input}; 
+				// this.props.updateMovieList(this.state.input); //this will search hard-coded data
+				this.props.handleMovieDBSearch(this.state.input)
 				this.clearInput()
 				}
 			}

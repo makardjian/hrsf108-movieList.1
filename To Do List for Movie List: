@@ -1,0 +1,8 @@
+To Do List for Movie List:
+
+1. Review Recastly sprint to determine how I can make an API call to the movie database
+
+2. Render that data to the DOM when a user searches for a movie
+
+3. Link up a get request that accesses the Movie database every time a user searches for a movie. 
+
